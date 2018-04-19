@@ -4,6 +4,10 @@
 #include <fstream>
 #include <cstdlib>
 
+//receives a file path, a width and a height
+//width and height are stored as uint16_t
+//the image at the path is stored in a 2d array of uint8_t
+
 int main(int argc, char *argv[]) {
 	std::string path = argv[1];
 	std::string input;
