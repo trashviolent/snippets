@@ -1,3 +1,5 @@
+//16667 microseconds for each update
+
 #include <chrono>
 #include <iostream>
 
@@ -5,8 +7,8 @@ int main(int argc, char *argv[])
 {
    auto start_time = std::chrono::high_resolution_clock::now();
    auto current_time = std::chrono::high_resolution_clock::now();
-   std::chrono::duration<double> finish(10);
-   std::chrono::duration<double> count(0);
+   std::chrono::seconds finish(10);
+   std::chrono::seconds count(0);
    std::chrono::duration<double> elapsed = current_time - start_time;
     while(count < finish) {
         if(elapsed >= count) {
