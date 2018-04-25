@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 {
    auto start_time = std::chrono::steady_clock::now();
    auto current_time = std::chrono::steady_clock::now();
-   int count = 30;
+   int count = 0;
    int moved =  0;
    int moveRate = 1;
    int moveDuration = 0;
@@ -13,49 +13,38 @@ int main(int argc, char *argv[])
    std::chrono::duration<double> elapsed = current_time - start_time;
     while(count <= 30) {
         if(elapsed >= duration) {
+            ++moveDuration;
             switch(moveRate) {
                 case 1:
-                    ++moveDuration;
-                    if(moveDuration == 5)
-                        ++move;
-                    else if(moveDuration == 6) {
-                        moveDuration = 0;
+                    ++moved;
+                    if(moveDuration > 2) {
                         ++moveRate;
+                        moveDuration = 0;
                     }
                     break;
                 case 2:
-                    ++moveDuration;
-                    if(moveDuration == 4)
-                        ++move;
-                    else if(moveDuration == 5) {
-                        moveDuration = 0;
+                    moved += 5;
+                    if(moveDuration > 2) {
                         ++moveRate;
+                        moveDuration = 0;
                     }
                     break;
                 case 3:
-                    ++moveDuration;
-                    if(moveDuration == 3)
-                        ++move;
-                    else if(moveDuration == 4) {
-                        moveDuration = 0;
+                    moved += 10;
+                    if(moveDuration > 2) {
                         ++moveRate;
+                        moveDuration = 0;
                     }
                     break;
                 case 4:
-                    ++moveDuration;
-                    if(moveDuration == 2)
-                        ++move;
-                    else if(moveDuration == 3) {
-                        moveDuration = 0;
+                    moved += 15;
+                    if(moveDuration > 2) {
                         ++moveRate;
+                        moveDuration = 0;
                     }
                     break;
                 case 5:
-                    ++moveDuration;
-                    if(moveDuration == 1) {
-                        ++move;
-                        moveDuration = 0;
-                    }
+                    moved += 20;
                     break;
             }
             ++count;
