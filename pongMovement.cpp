@@ -22,6 +22,18 @@ int main(int argc, char *argv[])
             sprite[6].setImageIndex(13);
          else if(playerScore == 10)
             sprite[6].setImageIndex(12);
+         if(input == 'y') {
+            gameComplete = false;
+            roundComplete = false;
+            playerScore = 0;
+            aiScore = 0;
+            sprite[6].setDisplay(false);
+            sprite[7].display(false);
+            sprite[0].setY(499);
+            sprite[1].setY(499);
+         }
+         else if(input == 'n')
+            game = false;
       }
       if(!gameComplete) {
          if(!roundComplete) {
