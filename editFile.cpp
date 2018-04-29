@@ -47,5 +47,10 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	file2.close();
+	file2.clear();
+	for(int a = 0; a < full; ++a) {
+		delete[] img[a];
+	}
+	delete[] img;
 	return 0;
 }
