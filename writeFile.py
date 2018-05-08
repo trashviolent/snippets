@@ -3,9 +3,8 @@ from PIL import Image
 path = raw_input("path: ")
 output = raw_input("output path: ")
 file = Image.open(path)
+w, h = file.size
 pixels = file.convert("RGBA")
-w = input("width: ")
-h = input("height: ")
 pixelArray = [[0 for y in range(w)] for x in range(h)]
 for one in range(h):
 	for two in range(w):
