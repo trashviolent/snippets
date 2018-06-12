@@ -56,6 +56,8 @@ ie.
 int main() {
     double ang, hyp, opp, adj;
     ang = 45.0;
+    double adjacent = centrePointX - bottomPointX;
+    double opposite = bottomPointY - topPointY;
     hyp = sqrt(opposite * opposite + adjacent * adjacent);
     adj = hyp * (cos(ang * M_PI / 180));
     opp = hyp * (sin(ang * M_PI / 180));
@@ -63,6 +65,26 @@ int main() {
     std::cout << "adjacent: " << adj << std::endl;
     return 0;
 }
+the opposite (opp) is the new y value of the point
+the adjacent (adj) is the new x value of the point
 
+c++ always rounds down when converting from double to int, which is a problem
+so you need to do the converstion to int manually
+ie. 
+double param = 5.5;
+if(param - (int)param > 0.5)
+    param = (int) param + 1;
+else
+    param = (int) param;
 
+before you do this conversion, however, you need to save the differences between the three points
+
+//difference of x on the horizontal, ie. difference between (0,0) and (1,0) in terms of x
+//these are all back to assuming that the origin is in the top left, rather than the centre
+double diffHorX = horizontalX - originX;
+double diffHorY = horiztonalY - originY;
+double diffVertX = verticalX - originX;
+double diffVertY = verticalY - originY;
+
+then you figure out how to apply them in a way that makes sense (working on it)
 */
