@@ -56,7 +56,7 @@ ie.
 int main() {
     double ang, hyp, opp, adj;
     ang = 45.0;
-    hyp = sqrt(50.0 * 50.0 + 50.0 * 50.0);
+    hyp = sqrt(opposite * opposite + adjacent * adjacent);
     adj = hyp * (cos(ang * M_PI / 180));
     opp = hyp * (sin(ang * M_PI / 180));
     std::cout << "opposite: " << opp << std::endl;
