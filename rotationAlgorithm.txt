@@ -1,0 +1,37 @@
+/*when rotating a rectangle, you should only need to know
+the new positions of (0,0), (1,0) and (0,1) to calculate the
+positions of all of the pixels in the rectangle, where (0,0)
+is the top left corner
+
+first, get the starting angle for those three pixels.  this
+should be part of the rectangle from when it's created, so that
+this calculation only needs to be performed once
+
+to get these angles
+
+uint8_t* pixels; //etc...
+int width = 500;
+int height = 300;
+int x[3] = {0, 1, 0};
+int y[3] = {0, 0, 1};
+double angle[3];
+float wOffset, hOffset;
+wOffset = width / 2;
+hOffset = height / 2;
+for(int a = 0; a < 3; ++a) {
+    x[a] -= wOffset;
+    y[a] -= hOffset;
+}
+
+so, the distance to x=0 and y=0 is known
+which means that you have a right triangle where all three points
+are known.  
+1) centre = (0,0), top point = (0 - wOffset, 0 - hOffset),
+bottom point = (0 - wOffset, 0)
+2) centre = (0,0), top point = (1 - wOffset, 0 - hOffset),
+bottom point = (1 - wOffset, 0)
+3) centre = (0,0), top point = (0 - wOffset, 1 - hOffset),
+bottom point = (0 - wOffset, 0)
+
+so for the 1st point you can write A = tan-1((bottomPointY - topPointY) / (centrePointX - bottomPointX))
+*/
