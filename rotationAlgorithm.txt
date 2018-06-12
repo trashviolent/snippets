@@ -5,7 +5,7 @@ is the top left corner
 
 first, get the starting angle for those three pixels.  this
 should be part of the rectangle from when it's created, so that
-this calculation only needs to be performed once
+this calculation only needs to be performed onc
 
 to get these angles
 
@@ -34,4 +34,35 @@ bottom point = (1 - wOffset, 0)
 bottom point = (0 - wOffset, 0)
 
 so for the 1st point you can write A = tan-1((bottomPointY - topPointY) / (centrePointX - bottomPointX))
+
+in code:
+    double param, result;
+    param = ((bottomPointY - topPointY) / (centrePointX - bottomPointX)); //opposite over adjacent
+    result = atan(param) * 180 / M_PI;
+
+then get the hypotenuse
+
+    double result;
+    result = sqrt(((bottomPointY - topPointY) * (bottomPointY - topPointY)) + ((centrePointX - bottomPointX) * (centrePointX - bottomPointX)));
+
+having the angle of all three points, and the hypotenuse related to all three angles/points, you then add on the rotation angle to all of the angles as required
+then you calculate the new position of the point
+
+ie.
+
+#include <iostream>
+#include <cmath>
+
+int main() {
+    double ang, hyp, opp, adj;
+    ang = 45.0;
+    hyp = sqrt(50.0 * 50.0 + 50.0 * 50.0);
+    adj = hyp * (cos(ang * M_PI / 180));
+    opp = hyp * (sin(ang * M_PI / 180));
+    std::cout << "opposite: " << opp << std::endl;
+    std::cout << "adjacent: " << adj << std::endl;
+    return 0;
+}
+
+
 */
