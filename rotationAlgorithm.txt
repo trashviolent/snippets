@@ -97,6 +97,15 @@ then you figure out how to apply them in a way that makes sense (working on it)
 #include <iostream>
 #include <cmath>
 
+double getAngle(int p_x, int p_y, int wOffset, int hOffset) {
+    int x = p_x;
+    int y = p_y;
+    x -= wOffset;
+    y -= hOffset;
+    double param = (double)y / (double)x;
+    return atan(param) * 180.0 / M_PI;
+}
+
 int main() {
     int width, height, screenWidth, screenHeight;
     std::cout << "width: ";
@@ -114,20 +123,11 @@ int main() {
     int x[3] = {0, 1, 0};
     int y[3] = {0, 0, 1};
     double startAngle[3];
-    double wOffset, hOffset;
-    wOffset = width / 2;
-    hOffset = height / 2;
-    int count = 0; //for printing
+    int wOffset = width / 2; //never use odd numbers for width or image sizes
+    int hOffset = height / 2;
     for(int a = 0; a < 3; ++a) {
-        x[a] -= wOffset; //-249
-        y[a] -= hOffset; //-250
-        std::cout << "x[" << a << "]: " << x[a] << std::endl;
-        std::cout << "y[" << a << "]: " << y[a] << std::endl;
-        double param = (double)y[a] / (double)x[a];
-        startAngle[a] = atan(param) * 180.0 / M_PI;
-        std::cout << "angle #" << count << ": " << startAngle[a] << std::endl;
-        std:: cout << "param #" << count << ": " << param << std::endl;
-        ++count;
+        startAngle[a] = getAngle(x[a], y[a], wOffset,hOffset);
+        std::cout << a << ": " << startAngle[a] << std::endl;
     }
     double rotatedAngle[3];
     return 0;
