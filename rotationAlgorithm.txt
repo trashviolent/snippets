@@ -30,7 +30,7 @@ are known.
 bottom point = (0 - wOffset, 0)
 2) centre = (0,0), top point = (1 - wOffset, 0 - hOffset),
 bottom point = (1 - wOffset, 0)
-3) centre = (0,0), top point = (0 - wOffset, 1 - hOffset),
+3) centre = (0,0), top point = (0 - wOffset, 0 - hOffset),
 bottom point = (0 - wOffset, 0)
 
 so for the 1st point you can write A = tan-1((bottomPointY - topPointY) / (centrePointX - bottomPointX))
