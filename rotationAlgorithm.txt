@@ -88,3 +88,7 @@ double diffVertY = verticalY - originY;
 
 then you figure out how to apply them in a way that makes sense (working on it)
 */
+
+//round doubles inexpensively
+//use size_t for indices, ie. for everything, to avoid casting
+//write my own tan, atan etc. functions to work with these limitations?
