@@ -93,3 +93,37 @@ then you figure out how to apply them in a way that makes sense (working on it)
 //use size_t for indices, ie. for everything, to avoid casting
 //write my own tan, atan etc. functions to work with these limitations?
 //actually, not necessary, since those are only calculated once, for the angle
+
+#include <iostream>
+#include <cmath>
+
+int main() {
+    int width, height, screenWidth, screenHeight;
+    std::cout << "width: ";
+    std::cin >> width;
+    std::cout << "height: ";
+    std::cin >> height;
+    if(width > height) {
+        screenWidth = width * 2;
+        screenHeight = width * 2;
+    }
+    else {
+        screenWidth = height * 2;
+        screenHeight = height * 2;
+    }
+    size_t x[3] = {0, 1, 0};
+    size_t y[3] = {0, 0, 1};
+    double startAngle[3];
+    float wOffset, hOffset;
+    wOffset = width / 2;
+    hOffset = height / 2;
+    for(size_t a = 0; a < 3; ++a) {
+        x[a] -= wOffset;
+        y[a] -= hOffset;
+        double param = y[a] / x[a];
+        startAngle[a] = atan(param) * 180 / M_PI;
+        std::cout << "0,0 angle: " << startAngle[a] << std::endl;
+    }
+    double rotatedAngle[3];
+    return 0;
+}
