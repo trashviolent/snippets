@@ -10,6 +10,7 @@ no need for any destructor*/
 class String {
     private:
         uint8_t* str; //null terminated
+        uint8_t maxSize; //the biggest str can be in memory, ie. the space set aside for it
     public:
         void setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
         int getSize(); //includes null byte, ie. size of str in bytes
@@ -19,17 +20,19 @@ class String {
 
 void String::setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition) {
     //readFile is already at the correct filePosition
+    readFile.read(reinterpret_cast<char*>(&maxSize), sizeof(uint8_t));
+    filePosition += 1;
     str = memoryPosition;
     int size;
     char input = '-';
     for(size = 0; input != '\0'; ++size) {
-        readFile.seekg(filePosition + size);
         readFile.read(&input, 1);
     }
     ++size;
     readFile.seekg(filePosition);
     readFile.read((char*)str, size);
-    memoryPosition += size; //increment for the next object to use the block
+    filePosition = readFile.tellg();
+    memoryPosition += maxSize; //increment for the next object to use the block
 }
 
 int String::getSize() { //includes null byte
@@ -51,9 +54,10 @@ void String::printLine() {
 int main() {
     std::ofstream writeFile;
     writeFile.open("test.test", std::ios::binary);
-    uint8_t* test = new uint8_t[5];
-    test[0] = 116; test[1] = 104; test[2] = 105; test[3] = 115; test[4] = 0;
-    writeFile.write((const char*)test, 5);
+    uint8_t* test = new uint8_t[6];
+    test[0] = 10; test[1] = 116; test[2] = 104; test[3] = 105; 
+    test[4] = 115; test[5] = 0;
+    writeFile.write((const char*)test, 6);
     writeFile.close();
     writeFile.clear();
     delete[] test;
@@ -77,7 +81,7 @@ int main() {
 }
 
 /*ie. file contents: this\0
-filePosition = 0
+filePosition = 1
 input = t
 size = 0
 input = h
