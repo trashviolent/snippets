@@ -13,8 +13,11 @@ class String {
         uint8_t maxSize; //the biggest str can be in memory, ie. the space set aside for it
     public:
         void setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
-        int getSize(); //includes null byte, ie. size of str in bytes
+        uint8_t getSize(); //includes null byte, ie. size of str in bytes
         int getLength(); //does not include null byte, ie. length of text
+        inline uint8_t getMaxSize() { return maxSize; }
+        bool operator==(String &string);
+        inline uint8_t getElement(int index) { return str[index]; }
         void printLine(); //for testing
 };
 
@@ -35,8 +38,8 @@ void String::setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &
     memoryPosition += maxSize; //increment for the next object to use the block
 }
 
-int String::getSize() { //includes null byte
-    int value;
+uint8_t String::getSize() { //includes null byte
+    uint8_t value;
     for(value = 0; str[value] != 0; ++value) {}
     return value + 1;
 }
@@ -45,6 +48,16 @@ int String::getLength() {
     int value;
     for(value = 0; str[value] != 0; ++value) {}
     return value;
+}
+
+bool String::operator==(String &string) {
+    if(string.getSize() != this->getSize())
+        return false;
+    for(int a = 0; a < this->getLength(); ++a) {
+        if(this->str[a] != string.getElement(a))
+            return false;
+    }
+    return true;
 }
 
 void String::printLine() {
@@ -68,14 +81,18 @@ int main() {
     readFile.open("test.test", std::ios::binary);
     String string;
     string.setupLine(readFile, start, pointer);
+    start = 0;
+    String string2;
+    string2.setupLine(readFile, start, pointer);
     readFile.close();
     string.printLine();
     for(int a = 5; a < 9; ++a) {
         std::cout << test2[a]; //this
     }
     std::cout << std::endl;
-    std::cout << "size of string: " << string.getSize() << std::endl;
+    std::cout << "size of string: " << (int)string.getSize() << std::endl;
     std::cout << "length of string: " << string.getLength() << std::endl;
+    std::cout << "compare strings: " << (string == string2) << std::endl;
     delete[] test;
     return 0;
 }
