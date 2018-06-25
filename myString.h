@@ -31,15 +31,15 @@ void String::getLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &me
 }
 
 void String::printLine() {
-    std::cout << str << std::endl; //test
+    std::cout << str << std::endl; //this
 }
 
 int main() {
     std::ofstream writeFile;
     writeFile.open("test.test", std::ios::binary);
-    char* test = new char[5];
-    test[0] = 't'; test[1] = 'e'; test[2] = 's'; test[3] = 't'; test[4] = '\0';
-    writeFile.write(test, 5);
+    uint8_t* test = new uint8_t[5];
+    test[0] = 116; test[1] = 104; test[2] = 105; test[3] = 115; test[4] = 0;
+    writeFile.write((const char*)test, 5);
     writeFile.close();
     writeFile.clear();
     delete[] test;
@@ -53,7 +53,7 @@ int main() {
     readFile.close();
     string.printLine();
     for(int a = 5; a < 9; ++a) {
-        std::cout << test2[a]; //test
+        std::cout << test2[a]; //this
     }
     std::cout << std::endl;
     delete[] test;
