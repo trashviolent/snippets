@@ -3,28 +3,15 @@
 #include <cstddef>
 
 /*ie. for reading in line of text to be used,
-identifiers for object(?), */
+identifiers for object(?), should eliminate any need for text files, 
+don't use for console input, used within limits of scene memory,
+would only ever be needed for a single line*/
 class String {
     private:
-        char* str; //null terminated
+        uint8_t* str; //null terminated
     public:
-        void getLine();
-        //void getLine(std::ifstream &readFile);
+        void getLine(std::ifstream &readFile, size_t &filePosition, ); //address of where to start in memory block
 };
-
-void String::getLine() {
-    char a;
-    std::cin.get(a);
-    std::cin.putback(a);
-    size_t size = std::cin.rdbuf()->in_avail();
-    std::cout << size << std::endl;
-    if(size > 0) {
-        str = new char[size];
-        std::cin.getline(str, size);
-        std::cout << str << std::endl;
-        delete[] str;
-    }
-}
 
 int main() {
     String string;
