@@ -12,19 +12,18 @@ int main() {
         test2[a] = 97 + a;
     }
     for(int a = 0; a < 10; ++a) {
-        std::cout << test1[a];
+        std::cout << test1[a]; //abcdefghij
     }
     
     std::cout << std::endl;
     for(int a = 0; a < 10; ++a) {
-        std::cout << test2[a];
+        std::cout << test2[a]; //abcdefghij
     }
     std::cout << std::endl;
     for(int a = 0; a < 20; ++a) {
-        std::cout << memblock[a];
+        std::cout << memblock[a]; //abcdefghijabcdefghij
     }
     std::cout << std::endl;
-    //delete[] test1;
     delete[] memblock;
     return 0;
 }
