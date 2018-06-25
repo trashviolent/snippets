@@ -47,9 +47,10 @@ int main() {
     uint8_t* pointer = test2 + 5;
     size_t start = 0;
     std::ifstream readFile;
-    readFile.open("test.test");
+    readFile.open("test.test", std::ios::binary);
     String string;
     string.getLine(readFile, start, pointer);
+    readFile.close();
     string.printLine();
     for(int a = 5; a < 9; ++a) {
         std::cout << test2[a]; //test
