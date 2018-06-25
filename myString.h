@@ -10,7 +10,7 @@ class String {
     private:
         uint8_t* str; //null terminated
     public:
-        void getLine(std::ifstream &readFile, size_t &filePosition, ); //address of where to start in memory block
+        void getLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
 };
 
 int main() {
