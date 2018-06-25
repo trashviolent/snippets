@@ -17,6 +17,10 @@ int main() {
     for(int a = 0; a < 4; ++a) {
         std::cout << (int)test[a] << std::endl;
     }
+    /*1                                                                                                                                                                                      
+      2                                                                                                                                                                                      
+      5                                                                                                                                                                                      
+      7 */
     delete[] test;
     return 0;
 }
