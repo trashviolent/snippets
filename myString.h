@@ -12,7 +12,8 @@ class String {
         uint8_t* str; //null terminated
     public:
         void setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
-        int getSize();
+        int getSize(); //includes null byte, ie. size of str in bytes
+        int getLength(); //does not include null byte, ie. length of text
         void printLine(); //for testing
 };
 
@@ -31,10 +32,16 @@ void String::setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &
     memoryPosition += size; //increment for the next object to use the block
 }
 
-void String::getSize() { //includes null byte
+int String::getSize() { //includes null byte
     int value;
     for(value = 0; str[value] != 0; ++value) {}
     return value + 1;
+}
+
+int String::getLength() {
+    int value;
+    for(value = 0; str[value] != 0; ++value) {}
+    return value;
 }
 
 void String::printLine() {
@@ -63,6 +70,8 @@ int main() {
         std::cout << test2[a]; //this
     }
     std::cout << std::endl;
+    std::cout << "size of string: " << string.getSize() << std::endl;
+    std::cout << "length of string: " << string.getLength() << std::endl;
     delete[] test;
     return 0;
 }
