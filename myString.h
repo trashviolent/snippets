@@ -11,11 +11,12 @@ class String {
     private:
         uint8_t* str; //null terminated
     public:
-        void getLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
+        void setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
+        int getSize();
         void printLine(); //for testing
 };
 
-void String::getLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition) {
+void String::setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition) {
     //readFile is already at the correct filePosition
     str = memoryPosition;
     int size;
@@ -28,6 +29,12 @@ void String::getLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &me
     readFile.seekg(filePosition);
     readFile.read((char*)str, size);
     memoryPosition += size; //increment for the next object to use the block
+}
+
+void String::getSize() { //includes null byte
+    int value;
+    for(value = 0; str[value] != 0; ++value) {}
+    return value + 1;
 }
 
 void String::printLine() {
@@ -49,7 +56,7 @@ int main() {
     std::ifstream readFile;
     readFile.open("test.test", std::ios::binary);
     String string;
-    string.getLine(readFile, start, pointer);
+    string.setupLine(readFile, start, pointer);
     readFile.close();
     string.printLine();
     for(int a = 5; a < 9; ++a) {
