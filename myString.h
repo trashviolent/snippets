@@ -92,7 +92,10 @@ int main() {
     std::cout << std::endl;
     std::cout << "size of string: " << (int)string.getSize() << std::endl;
     std::cout << "length of string: " << string.getLength() << std::endl;
-    std::cout << "compare strings: " << (string == string2) << std::endl;
+    if(string == string2)
+        std::cout << "strings are equal" << std::endl;
+    else
+        std::cout << "strings are not equal" << std::endl;
     delete[] test;
     return 0;
 }
