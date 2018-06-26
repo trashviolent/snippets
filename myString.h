@@ -18,6 +18,7 @@ class String {
         inline uint8_t getMaxSize() { return maxSize; }
         bool operator==(String &string);
         inline uint8_t getElement(int index) { return str[index]; }
+        inline void putElement(int index, uint8_t element) { str[index] = element; }
         void printLine(); //for testing
 };
 
@@ -68,7 +69,7 @@ int main() {
     std::ofstream writeFile;
     writeFile.open("test.test", std::ios::binary);
     uint8_t* test = new uint8_t[6];
-    test[0] = 10; test[1] = 116; test[2] = 104; test[3] = 105; 
+    test[0] = 6; test[1] = 116; test[2] = 104; test[3] = 105; 
     test[4] = 115; test[5] = 0;
     writeFile.write((const char*)test, 6);
     writeFile.close();
@@ -82,6 +83,9 @@ int main() {
     String string;
     string.setupLine(readFile, start, pointer);
     start = 0;
+    readFile.clear();
+    readFile.seekg(start);
+    std::cout << readFile.tellg() << std::endl;
     String string2;
     string2.setupLine(readFile, start, pointer);
     readFile.close();
@@ -93,9 +97,14 @@ int main() {
     std::cout << "size of string: " << (int)string.getSize() << std::endl;
     std::cout << "length of string: " << string.getLength() << std::endl;
     if(string == string2)
-        std::cout << "strings are equal" << std::endl;
+        std::cout << "strings are equal" << std::endl; //this runs
     else
         std::cout << "strings are not equal" << std::endl;
+    string2.putElement(0, 12);
+    if(string == string2)
+        std::cout << "strings are equal" << std::endl;
+    else
+        std::cout << "strings are not equal" << std::endl; //this runs
     delete[] test;
     return 0;
 }
