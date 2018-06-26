@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cstddef>
 
+uint8_t* testFunc2 (uint8_t* & address) {
+    std::cout << &address << std::endl; //same value
+}
+
 void testFunc(uint8_t* &address) {
     std::cout << &address << std::endl;
     uint8_t* test = address;
@@ -17,6 +21,9 @@ int main() {
     for(int a = 0; a < 4; ++a) {
         std::cout << (int)test[a] << std::endl;
     }
+    pointer = test;
+    uint8_t* secondPointer = testFunc2(pointer);
+    std::cout << &secondPointer << std::endl; //same value
     /*1                                                                                                                                                                                      
       2                                                                                                                                                                                      
       5                                                                                                                                                                                      
