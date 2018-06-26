@@ -1,13 +1,15 @@
 #include <iostream>
 #include <cstddef>
 
+//fixed
+
 uint8_t* testFunc2 (uint8_t* &address) {
-    std::cout << &address << std::endl; //same value
+    std::cout << (void*)address << std::endl; //same value
     return address;
 }
 
 void testFunc(uint8_t* &address) {
-    std::cout << &address << std::endl;
+    std::cout << (void*)address << std::endl;
     uint8_t* test = address;
     test[0] = 5;
     test[1] = 7;
@@ -24,7 +26,7 @@ int main() {
     }
     pointer = test;
     uint8_t* secondPointer = testFunc2(pointer);
-    std::cout << &secondPointer << std::endl; //not the same value
+    std::cout << (void*)secondPointer << std::endl;
     /*1                                                                                                                                                                                      
       2                                                                                                                                                                                      
       5                                                                                                                                                                                      
