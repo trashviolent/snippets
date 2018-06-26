@@ -117,6 +117,12 @@ int main() {
         std::cout << "strings are equal" << std::endl; //this runs
     else
         std::cout << "strings are not equal" << std::endl;
+    for(int a = 0; a < string.getLength(); ++a) {
+        std::cout << string.getElement(a) << std::endl; //prints this
+    }
+    for(int a = 0; a < string2.getLength(); ++a) {
+        std::cout << string2.getElement(a) << std::endl; //prints this
+    }
     delete[] test;
     return 0;
 }
