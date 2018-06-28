@@ -20,6 +20,9 @@ class String {
         bool operator==(const char* string);
         void operator=(String &string); //assumes this string's max size can accomodate the copy
         void operator=(const char* string);
+        void operator+=(String &string);
+        void operator+=(const char* string);
+        void clear();
         inline uint8_t getElement(int index) { return str[index]; }
         inline void putElement(int index, uint8_t element) { str[index] = element; }
         void printLine(); //for testing
@@ -88,6 +91,30 @@ void String::operator=(const char* string) {
         str[a] = string[a];
     }
     str[a] = '\0';
+}
+
+void String::operator+=(String &string) {
+    int size = this->getLength();
+    for(int a = size; a < (size + string.getLength()); ++a) {
+        this->str[a] = string.getElement(a - size);
+    }
+    this->str[this->getLength()] = '\0';
+}
+
+void String::operator+=(const char* string) {
+    int size = getLength();
+    int size2;
+    for(size2 = 0; string[size2] != '\0'; ++size2) {}
+    for(int a = size; a < (size + size2); ++a) {
+        str[a] = string[a - size];
+    }
+    str[this->getLength()] = '\0';
+}
+
+void String::clear() {
+    for(int a = 0; a < maxSize; ++a) {
+        str[a] = '\0';
+    }
 }
 
 void String::printLine() {
