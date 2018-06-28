@@ -13,7 +13,7 @@ class String {
         uint8_t maxSize; //the biggest str can be in memory, ie. the space set aside for it
     public:
         void setupLine(std::ifstream &readFile, size_t &filePosition, uint8_t* &memoryPosition);
-        uint8_t getSize(); //includes null byte, ie. size of str in bytes
+        uint8_t getSize(); //includes null byte, ie. size of str in bytes, not total space that the string takes up, that is maxSize
         int getLength(); //does not include null byte, ie. length of text
         inline uint8_t getMaxSize() { return maxSize; }
         bool operator==(String &string);
@@ -123,6 +123,15 @@ int main() {
     for(int a = 0; a < string2.getLength(); ++a) {
         std::cout << string2.getElement(a) << std::endl; //prints this
     }
+    std::cout << "final test: ";
+    for(int a = 5; a < (string.getLength() + 5); ++a) {
+        std::cout << test2[a]; //this
+    }
+    std::cout << std::endl;
+    for(int a = string.getMaxSize() + 5; a < string2.getLength() + string.getMaxSize() + 5; ++a) {
+        std::cout << test2[a]; //this
+    }
+    std::cout << std::endl; //works perfectly
     delete[] test;
     return 0;
 }
