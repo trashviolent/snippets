@@ -17,7 +17,9 @@ class String {
         int getLength(); //does not include null byte, ie. length of text
         inline uint8_t getMaxSize() { return maxSize; }
         bool operator==(String &string);
+        bool operator==(const char* string);
         void operator=(String &string); //assumes this string's max size can accomodate the copy
+        void operator=(const char* string);
         inline uint8_t getElement(int index) { return str[index]; }
         inline void putElement(int index, uint8_t element) { str[index] = element; }
         void printLine(); //for testing
@@ -62,10 +64,30 @@ bool String::operator==(String &string) {
     return true;
 }
 
+bool String::operator==(const char* string) {
+    int size;
+    for(size = 0; string[size] != '\0'; ++size) {}
+    if(getSize() != size)
+        return false;
+    for(int a = 0; a < this->getLength(); ++a) {
+        if(str[a] != string[a])
+            return false;
+    }
+    return true;
+}
+
 void String::operator=(String &string) {
     for(int a = 0; a < string.getSize(); ++a) {
         this->str[a] = string.getElement(a);
     }
+}
+
+void String::operator=(const char* string) {
+    int a;
+    for(a = 0; string[a] != '\0'; ++a) {
+        str[a] = string[a];
+    }
+    str[a] = '\0';
 }
 
 void String::printLine() {
