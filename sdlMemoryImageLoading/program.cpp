@@ -166,7 +166,7 @@ void Program::programCore() {
 				}
 			}
 			if (worldImageDataToBeUsedIndexCurrentIndex > 0)
-				this->frameData[a].frameImageDataNum = worldImageDataToBeUsedIndexCurrentIndex + 1;
+				this->frameData[a].frameImageDataNum = worldImageDataToBeUsedIndexCurrentIndex;
 			else
 				this->frameData[a].frameImageDataNum = 0;
 			if (this->frameData[a].frameImageDataNum != previousImageNum) {
