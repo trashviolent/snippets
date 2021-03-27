@@ -4,8 +4,8 @@ int main() {
     //always keeps the same aspect ratio as in development
     double devViewportWidthPixels = 1920;
     double devViewportHeightPixels = 1080;
-    int newViewportWidthPixels = 2000;
-    int newViewportHeightPixels = newViewportWidthPixels * (double)(devViewportHeightPixels / devViewportWidthPixels);
+    double newViewportWidthPixels = 2000;
+    double newViewportHeightPixels = newViewportWidthPixels * (double)(devViewportHeightPixels / devViewportWidthPixels);
     std::cout << "new viewport height pixels: " << newViewportHeightPixels << std::endl;
     
     double screenPercentToOneMetre = 10;
@@ -15,20 +15,25 @@ int main() {
     double newPixelsToOneMetre = newViewportWidthPixels / screenPercentToOneMetre;
     std::cout << "new pixels to one metre: " << newPixelsToOneMetre << std::endl;
     
-    double newViewportWidthMetric = (double)(newViewportWidthPixels) / newPixelsToOneMetre;
+    double newViewportWidthMetric = newViewportWidthPixels / newPixelsToOneMetre;
     std::cout << "new viewport width metric: " << newViewportWidthMetric << std::endl;
     
-    double newViewportHeightMetric = (double)(newViewportHeightPixels) / newPixelsToOneMetre;
+    double newViewportHeightMetric = newViewportHeightPixels / newPixelsToOneMetre;
     std::cout << "new viewport height metric: " << newViewportHeightMetric << std::endl;
     
-    int originalImageWidthPixels = 256;
-    int originalImageHeightPixels = 256;
+    double originalImageWidthPixels = 256;
+    double originalImageHeightPixels = 256;
     
-    int imageWidthPixels = (double)originalImageWidthPixels - (double)((double)originalImageWidthPixels * (double)((devViewportWidthPixels - newViewportWidthPixels) / devViewportWidthPixels));
+    double imageWidthPixels = originalImageWidthPixels - (originalImageWidthPixels * ((devViewportWidthPixels - newViewportWidthPixels) / devViewportWidthPixels));
+    std::cout << "pre-rounding new image width pixels: " << imageWidthPixels << std::endl;
+    if(imageWidthPixels - (int)imageWidthPixels > 0.5)
+        imageWidthPixels = (int)imageWidthPixels + 1;
+    else
+        imageWidthPixels = (int)imageWidthPixels;
     std::cout << "new image width pixels: " << imageWidthPixels << std::endl;
     
     //only allow square textures, and since the aspect ratio is the same, give height the same value
-    int imageHeightPixels = imageWidthPixels;
+    double imageHeightPixels = imageWidthPixels;
     
     double imageWidthMetric = (double)imageWidthPixels / newPixelsToOneMetre;
     std::cout << "image width metric: " << imageWidthMetric << std::endl;
