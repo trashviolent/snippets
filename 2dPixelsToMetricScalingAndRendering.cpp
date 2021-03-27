@@ -45,7 +45,7 @@ int main() {
     
     bool imageRendered = false;
     
-    //store width and height in pixels since those are small values unlikely to change much
+    //store width and height in pixels all the time, as well, since those are small values unlikely to change much
     
     if(((imageXMetric + imageWidthMetric) >= newViewportXMetric) && (imageXMetric < (newViewportXMetric + newViewportWidthMetric))) {
         if(((imageYMetric + imageHeightMetric) >= newViewportYMetric) && (imageYMetric < (newViewportYMetric + newViewportHeightMetric))) {
