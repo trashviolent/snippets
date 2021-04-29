@@ -4,18 +4,18 @@
 
 class Actor {
 public:
-	size_t getX();
-	size_t getY();
-	void setCoordinates(size_t x, size_t y);
-	size_t getWidth();
-	size_t getHeight();
-	void setDimensions(size_t width, size_t height);
+	float getX();
+	float getY();
+	void setCoordinates(float x, float y);
+	float getWidth();
+	float getHeight();
+	void setDimensions(float width, float height);
 	size_t getTextureIndex();
 	void setTextureIndex(size_t textureIndex);
 private:
-	size_t x;
-	size_t y;
-	size_t width;
-	size_t height;
+	float x;
+	float y;
+	float width;
+	float height;
 	size_t textureIndex;
 };

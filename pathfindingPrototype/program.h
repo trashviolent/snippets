@@ -2,6 +2,7 @@
 
 #include "actor.h"
 #include "inputState.h"
+#include "pathfindingData.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <cstdint>
@@ -12,8 +13,9 @@ public:
 	~Program();
 	void run();
 protected:
-	void moveUser(double vertical, double horizontal);
-	void plotAIPath(size_t playerX, size_t playerY);
+	void moveUser(float vertical, float horizontal);
+	void moveAI(float timeElapsed);
+	void plotAIPath(float playerX, float playerY);
 private:
 	Actor* background;
 	size_t backgroundNum;
@@ -26,17 +28,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 	InputState inputState;
-	size_t aiDestinationX;
-	size_t aiDestinationY;
-	double movementPerSecond;
+	PathfindingData pathfindingData;
+	float movementPerSecond;
 	bool runProgram;
 };
-
-/*
-replace aiDestinationX and y with a struct
-called aiPathNodes.  this will contain the nodes
-as floats for x and y coordinates, and the direction
-to travel for each node (neutral for the last one)
-
-change everything to use floats
-*/
