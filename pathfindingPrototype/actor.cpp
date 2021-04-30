@@ -1,28 +1,36 @@
 #include "actor.h"
 #include <cstdint>
 
-size_t Actor::getX() {
+float Actor::getX() {
 	return this->x;
 }
 
-size_t Actor::getY() {
+void Actor::setX(float x) {
+	this->x = x;
+}
+
+float Actor::getY() {
 	return this->y;
 }
 
-void Actor::setCoordinates(size_t x, size_t y) {
+void Actor::setY(float y) {
+	this->y = y;
+}
+
+void Actor::setCoordinates(float x, float y) {
 	this->x = x;
 	this->y = y;
 }
 
-size_t Actor::getWidth() {
+float Actor::getWidth() {
 	return this->width;
 }
 
-size_t Actor::getHeight() {
+float Actor::getHeight() {
 	return this->height;
 }
 
-void Actor::setDimensions(size_t width, size_t height) {
+void Actor::setDimensions(float width, float height) {
 	this->width = width;
 	this->height = height;
 }

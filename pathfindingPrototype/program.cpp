@@ -165,6 +165,8 @@ void Program::run() {
 				else if (event.key.keysym.sym == SDLK_d)
 					this->inputState.d = false;
 			}
+			if (event.type == SDL_QUIT)
+				this->runProgram = false;
 		}
 		currentTime = std::chrono::steady_clock::now();
 		std::chrono::duration<float> durationElapsed = currentTime - startTime;
@@ -179,7 +181,7 @@ void Program::run() {
 			userVertical *= -1.0f;
 		if (inputState.a || inputState.d)
 			userHorizontal = this->movementPerSecond * timeElapsed;
-		if (inputState.d)
+		if (inputState.a)
 			userHorizontal *= -1.0f;
 		this->moveUser(userVertical, userHorizontal);
 
@@ -219,4 +221,26 @@ void Program::run() {
 		}
 		SDL_RenderPresent(this->renderer);
 	}
+}
+
+void Program::moveUser(float vertical, float horizontal) {
+	float tempX = this->character[0].getX() + horizontal;
+	float tempY = this->character[0].getY() + vertical;
+	if ((this->character[0].getX() + horizontal) < 0)
+		tempX = 0.0f;
+	else if ((this->character[0].getX() + this->character[0].getWidth() + horizontal) > 1600)
+		tempX = 1600.0f - this->character[0].getWidth();
+	if ((this->character[0].getY() + vertical) < 0)
+		tempY = 0.0f;
+	else if ((this->character[0].getY() + this->character[0].getHeight() + vertical) > 960)
+		tempY = 960.0f - this->character[0].getHeight();
+	this->character[0].setCoordinates(tempX, tempY);
+}
+
+void Program::moveAI(float timeElapsed) {
+	return;
+}
+
+void Program::plotAIPath(float playerX, float playerY) {
+	return;
 }

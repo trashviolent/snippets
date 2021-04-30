@@ -5,7 +5,9 @@
 class Actor {
 public:
 	float getX();
+	void setX(float x);
 	float getY();
+	void setY(float y);
 	void setCoordinates(float x, float y);
 	float getWidth();
 	float getHeight();
