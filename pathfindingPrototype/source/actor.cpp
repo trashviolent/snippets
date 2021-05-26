@@ -42,3 +42,37 @@ size_t Actor::getTextureIndex() {
 void Actor::setTextureIndex(size_t textureIndex) {
 	this->textureIndex = textureIndex;
 }
+
+float Actor::getMovementPerSecond() {
+	return this->movementPerSecond;
+}
+
+void Actor::setMovementPerSecond(float movementPerSecond) {
+	this->movementPerSecond = movementPerSecond;
+	this->maxMovementPerFramePositive = this->movementPerSecond / 30.0f;
+	this->maxMovementPerFrameNegative = this->maxMovementPerFramePositive * -1.0f;
+}
+
+float Actor::getMaxMovementPerFramePositive() {
+	return this->maxMovementPerFramePositive;
+}
+
+float Actor::getMaxMovementPerFrameNegative() {
+	return this->maxMovementPerFrameNegative;
+}
+
+float Actor::getHorizontalMovement() {
+	return this->horizontalMovement;
+}
+
+void Actor::setHorizontalMovement(float horizontalMovement) {
+	this->horizontalMovement = horizontalMovement;
+}
+
+float Actor::getVerticalMovement() {
+	return this->verticalMovement;
+}
+
+void Actor::setVerticalMovement(float verticalMovement) {
+	this->verticalMovement = verticalMovement;
+}

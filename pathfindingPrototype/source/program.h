@@ -13,7 +13,7 @@ public:
 	~Program();
 	void run();
 protected:
-	void moveUser(float vertical, float horizontal);
+	void moveUser(size_t characterIndex);
 	void moveAI(float timeElapsed);
 	void plotAIPath(float playerX, float playerY);
 private:
@@ -29,9 +29,5 @@ private:
 	SDL_Renderer* renderer;
 	InputState inputState;
 	PathfindingData pathfindingData;
-	Actor** collisionCandidates;
-	size_t collisionCandidatesMaxNum;
-	size_t collisionCandidatesCurrentNum;
-	float movementPerSecond;
 	bool runProgram;
 };

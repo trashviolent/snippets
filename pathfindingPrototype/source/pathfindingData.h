@@ -10,7 +10,7 @@ public:
 	float getCurrentNodeY();
 	bool getPathComplete();
 private:
-	float** node;
+	float** node; //not sure about this
 	size_t nodeMaxNum;
 	size_t nodeCurrentNum;
 	size_t currentNode;

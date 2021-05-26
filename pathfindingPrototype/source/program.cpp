@@ -7,7 +7,7 @@
 #include <fstream>
 #include <chrono>
 
-Program::Program() : pathfindingData(256), collisionCandidates(nullptr) {
+Program::Program() : pathfindingData(256) {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	this->window = SDL_CreateWindow("pathfinding prototype", 100, 100, 1600, 960, SDL_WINDOW_SHOWN);
@@ -328,10 +328,7 @@ Program::Program() : pathfindingData(256), collisionCandidates(nullptr) {
 		this->character[a].setDimensions(64.0f, 64.0f);
 	}
 
-	this->collisionCandidatesMaxNum = 256;
-	this->collisionCandidates = new Actor*[this->collisionCandidatesMaxNum]; //in full program will refer to frameData
-	this->collisionCandidatesCurrentNum = 0;
-	this->movementPerSecond = 256.0f;
+	this->character[0].setMovementPerSecond(256.0f);
 
 	this->runProgram = true;
 }
@@ -396,17 +393,22 @@ void Program::run() {
 		float timeElapsed = durationElapsed.count();
 		startTime = std::chrono::steady_clock::now();
 
-		float userVertical = 0.0f;
-		float userHorizontal = 0.0f;
-		if (inputState.w || inputState.s)
-			userVertical = this->movementPerSecond * timeElapsed;
-		if (inputState.w)
-			userVertical *= -1.0f;
-		if (inputState.a || inputState.d)
-			userHorizontal = this->movementPerSecond * timeElapsed;
-		if (inputState.a)
-			userHorizontal *= -1.0f;
-		this->moveUser(userVertical, userHorizontal);
+		if (inputState.a || inputState.d) {
+			if (inputState.d)
+				this->character[0].setHorizontalMovement(this->character[0].getMovementPerSecond() * timeElapsed);
+			else if (inputState.a)
+				this->character[0].setHorizontalMovement((this->character[0].getMovementPerSecond() * timeElapsed) * -1.0f);
+		}
+		else if (this->character[0].getHorizontalMovement() != 0.0f) {
+			this->character[0].setHorizontalMovement(0.0f);
+		}
+		if (inputState.w || inputState.d) {
+			if(inputState.s)
+				this->character[0].setVerticalMovement(this->character[0].getMovementPerSecond() * timeElapsed);
+			else if (inputState.w)
+				this->character[0].setVerticalMovement((this->character[0].getMovementPerSecond() * timeElapsed) * -1.0f);
+		}
+		this->moveUser(0);
 
 		if (this->pathfindingData.getPathComplete() == false)
 			this->moveAI(timeElapsed);
@@ -446,7 +448,28 @@ void Program::run() {
 	}
 }
 
-void Program::moveUser(float vertical, float horizontal) {
+void Program::moveUser(size_t characterIndex) {
+	if (vertical > 0) {
+		if (vertical > this->character[0].getMaxMovementPerFramePositive())
+			vertical = this->maxMovementPerFramePositive;
+	}
+	else if (vertical < 0) {
+		if (vertical < this->maxMovementPerFrameNegative)
+			vertical = this->maxMovementPerFrameNegative;
+	}
+	if (vertical > 0) {
+		if (vertical > this->maxMovementPerFramePositive)
+			vertical = this->maxMovementPerFramePositive;
+	}
+	else if (vertical < 0) {
+		if (vertical < this->maxMovementPerFrameNegative)
+			vertical = this->maxMovementPerFrameNegative;
+	}
+	for (size_t a = 0; a < this->obstacleNum; ++a) {
+
+	}
+	
+	
 	/*
 	size_t** collisionOrderIndex[8][8];
 
